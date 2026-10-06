@@ -1,0 +1,24 @@
+# =============================================================================
+# .gitignore — MPI Fraud Detection
+# =============================================================================
+
+# Large full dataset (exceeds GitHub 100 MB hard limit)
+data/paysim_full.csv
+
+# Compiled binaries & build artifacts
+*.exe
+*.o
+*.out
+src/seq_fraud
+src/mpi_fraud
+
+# System & IDE files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary files & logs
+*.log
+*.tmp

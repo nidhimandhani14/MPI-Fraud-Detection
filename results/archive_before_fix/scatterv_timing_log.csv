@@ -1,0 +1,25 @@
+dataset,rows,procs,io_sec,pure_comp_sec,comm_sec,total_sec,speedup,flagged,status
+paysim_10k.csv,10000,1(seq),0.029708,seconds,0.000000,seconds,1.00,242,PASS
+paysim_10k.csv,10000,1,0.173064,seconds,(14.4%),seconds,N/A,242,✅ PASS
+paysim_10k.csv,10000,2,0.150593,seconds,(22.4%),seconds,N/A,242,✅ PASS
+paysim_10k.csv,10000,4,0.113604,seconds,(37.1%),seconds,N/A,242,✅ PASS
+paysim_10k.csv,10000,8,0.090433,seconds,(34.3%),seconds,N/A,242,✅ PASS
+paysim_10k.csv,10000,16,0.186125,seconds,(97.5%),seconds,N/A,242,✅ PASS
+paysim_100k.csv,100000,1(seq),0.303841,seconds,0.000000,seconds,1.00,3392,PASS
+paysim_100k.csv,100000,1,1.496367,seconds,(13.1%),seconds,N/A,3392,✅ PASS
+paysim_100k.csv,100000,2,0.900731,seconds,(18.9%),seconds,N/A,3392,✅ PASS
+paysim_100k.csv,100000,4,0.810471,seconds,(20.5%),seconds,N/A,3392,✅ PASS
+paysim_100k.csv,100000,8,0.792232,seconds,(26.2%),seconds,N/A,3392,✅ PASS
+paysim_100k.csv,100000,16,1.040630,seconds,(69.1%),seconds,N/A,3392,✅ PASS
+paysim_1m.csv,1000000,1(seq),2.590141,seconds,0.000000,seconds,1.00,31481,PASS
+paysim_1m.csv,1000000,1,11.813025,seconds,(12.2%),seconds,N/A,31481,✅ PASS
+paysim_1m.csv,1000000,2,8.719892,seconds,(20.5%),seconds,N/A,31481,✅ PASS
+paysim_1m.csv,1000000,4,7.677460,seconds,(21.3%),seconds,N/A,31481,✅ PASS
+paysim_1m.csv,1000000,8,7.444081,seconds,(20.3%),seconds,N/A,31481,✅ PASS
+paysim_1m.csv,1000000,16,10.877483,seconds,(23.8%),seconds,N/A,31481,✅ PASS
+paysim_full.csv,6362620,1(seq),15.257028,seconds,0.000000,seconds,1.00,81410,PASS
+paysim_full.csv,6362620,1,81.825055,seconds,(12.8%),seconds,N/A,81410,✅ PASS
+paysim_full.csv,6362620,2,55.053537,seconds,(17.0%),seconds,N/A,81410,✅ PASS
+paysim_full.csv,6362620,4,47.971905,seconds,(21.7%),seconds,N/A,81410,✅ PASS
+paysim_full.csv,6362620,8,49.132480,seconds,(19.3%),seconds,N/A,81410,✅ PASS
+paysim_full.csv,6362620,16,74.343227,seconds,(20.1%),seconds,N/A,81410,✅ PASS

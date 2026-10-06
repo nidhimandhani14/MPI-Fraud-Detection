@@ -1,0 +1,17 @@
+dataset,rows,procs,io_sec,pure_comp_sec,comm_sec,total_comp_comm_sec,pure_speedup,total_speedup,flagged,correctness
+paysim_10k.csv,10,000,Sequential (1 core),0.009703,0.000721,0.000000,0.000721,1.00,1.00,242,✅ PASS
+paysim_10k.csv,10,000,MPI Parallel I/O (np=1),0.011363,0.001471,0.000042,0.001513,0.49,0.48,242,✅ PASS
+paysim_10k.csv,10,000,MPI Parallel I/O (np=2),0.005185,0.000811,0.000058,0.000869,0.89,0.83,242,✅ PASS
+paysim_10k.csv,10,000,MPI Parallel I/O (np=4),0.025983,0.001292,0.018247,0.019538,0.56,0.04,242,✅ PASS
+paysim_100k.csv,100,000,Sequential (1 core),0.101286,0.008798,0.000000,0.008798,1.00,1.00,3392,✅ PASS
+paysim_100k.csv,100,000,MPI Parallel I/O (np=1),0.104775,0.009996,0.000496,0.010492,0.88,0.84,3392,✅ PASS
+paysim_100k.csv,100,000,MPI Parallel I/O (np=2),0.080857,0.015992,0.000579,0.016571,0.55,0.53,3392,✅ PASS
+paysim_100k.csv,100,000,MPI Parallel I/O (np=4),0.060045,0.013316,0.001303,0.014620,0.66,0.60,3392,✅ PASS
+paysim_1m.csv,1,000,000,Sequential (1 core),1.063409,0.110947,0.000000,0.110947,1.00,1.00,31481,✅ PASS
+paysim_1m.csv,1,000,000,MPI Parallel I/O (np=1),0.974001,0.112388,0.005946,0.118334,0.99,0.94,31481,✅ PASS
+paysim_1m.csv,1,000,000,MPI Parallel I/O (np=2),0.685608,0.139042,0.009876,0.148918,0.80,0.75,31481,✅ PASS
+paysim_1m.csv,1,000,000,MPI Parallel I/O (np=4),0.485683,0.160981,0.010135,0.171116,0.69,0.65,31481,✅ PASS
+paysim_full.csv,6,362,620,Sequential (1 core),7.241339,0.964967,0.000000,0.964967,1.00,1.00,81410,✅ PASS
+paysim_full.csv,6,362,620,MPI Parallel I/O (np=1),7.382291,0.886887,0.033565,0.920451,1.09,1.05,81410,✅ PASS
+paysim_full.csv,6,362,620,MPI Parallel I/O (np=2),3.603505,0.889127,0.028170,0.917296,1.09,1.05,81410,✅ PASS
+paysim_full.csv,6,362,620,MPI Parallel I/O (np=4),3.177566,1.273878,0.057637,1.331515,0.76,0.72,81410,✅ PASS

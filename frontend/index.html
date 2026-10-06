@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fraud Detection using MPI — Performance Dashboard</title>
+  <meta name="description" content="Parallel fraud detection performance analysis dashboard using OpenMPI on PaySim financial transaction data.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-left">
+      <h1 class="header-title">Fraud Detection using MPI</h1>
+      <p class="header-subtitle">Parallel Performance Analysis</p>
+    </div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <span class="theme-icon" id="themeIcon">☀️</span>
+    </button>
+  </header>
+
+  <main class="main">
+
+    <!-- Run Analysis Section -->
+    <section class="section" id="runSection">
+      <h2 class="section-title">Run Analysis</h2>
+      <div class="controls-row">
+        <div class="control-group">
+          <label class="control-label" for="datasetSelect">Dataset</label>
+          <select class="control-select" id="datasetSelect">
+            <option value="10k">paysim_10k.csv — 10K rows</option>
+            <option value="100k">paysim_100k.csv — 100K rows</option>
+            <option value="1m">paysim_1m.csv — 1M rows</option>
+            <option value="full" selected>paysim_full.csv — 6.36M rows</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="procsSelect">MPI Processes</label>
+          <select class="control-select" id="procsSelect">
+            <option value="seq">Sequential (1 core)</option>
+            <option value="1">np = 1</option>
+            <option value="2">np = 2</option>
+            <option value="4" selected>np = 4</option>
+            <option value="8">np = 8</option>
+          </select>
+        </div>
+        <div class="control-group control-group-btn">
+          <button class="btn-run" id="btnRun">
+            <span class="btn-icon">▶</span>
+            Run Analysis
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Status Bar -->
+    <section class="status-bar" id="statusBar">
+      <div class="status-item">
+        <span class="status-label">Dataset</span>
+        <span class="status-value" id="statusDataset">paysim_full.csv</span>
+      </div>
+      <div class="status-divider"></div>
+      <div class="status-item">
+        <span class="status-label">MPI Processes</span>
+        <span class="status-value" id="statusProcs">np = 4</span>
+      </div>
+      <div class="status-divider"></div>
+      <div class="status-item">
+        <span class="status-label">Status</span>
+        <span class="status-value status-ready" id="statusState">Ready</span>
+      </div>
+    </section>
+
+    <!-- Results Metric Cards -->
+    <section class="section" id="resultsSection">
+      <h2 class="section-title">Results</h2>
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <span class="metric-label">Total Transactions</span>
+          <span class="metric-value" id="metricTotal">—</span>
+        </div>
+        <div class="metric-card metric-card-flagged">
+          <span class="metric-label">Flagged Transactions</span>
+          <span class="metric-value" id="metricFlagged">—</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">I/O Time</span>
+          <span class="metric-value" id="metricIO">—</span>
+          <span class="metric-unit">seconds</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Computation Time</span>
+          <span class="metric-value" id="metricComp">—</span>
+          <span class="metric-unit">seconds</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Communication Time</span>
+          <span class="metric-value" id="metricComm">—</span>
+          <span class="metric-unit">seconds</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Total Time</span>
+          <span class="metric-value" id="metricTotalTime">—</span>
+          <span class="metric-unit">seconds</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Performance Analysis Charts -->
+    <section class="section" id="chartsSection">
+      <h2 class="section-title">Performance Analysis</h2>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3 class="chart-title">Execution Time vs MPI Processes</h3>
+          <div class="chart-container">
+            <canvas id="chartExecTime"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3 class="chart-title">Speedup vs MPI Processes</h3>
+          <div class="chart-container">
+            <canvas id="chartSpeedup"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3 class="chart-title">Parallel Efficiency vs MPI Processes</h3>
+          <div class="chart-container">
+            <canvas id="chartEfficiency"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3 class="chart-title">Execution Time vs Dataset Size</h3>
+          <div class="chart-container">
+            <canvas id="chartDatasetSize"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Correctness Table -->
+    <section class="section" id="correctnessSection">
+      <h2 class="section-title">Correctness Verification</h2>
+      <div class="table-wrap">
+        <table class="data-table" id="correctnessTable">
+          <thead>
+            <tr>
+              <th>Dataset</th>
+              <th>Rows</th>
+              <th>Sequential</th>
+              <th>np=1</th>
+              <th>np=2</th>
+              <th>np=4</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="mono">paysim_10k.csv</td>
+              <td>10,000</td>
+              <td class="mono">242</td>
+              <td class="mono">242</td>
+              <td class="mono">242</td>
+              <td class="mono">242</td>
+              <td><span class="badge-pass">✅ PASS</span></td>
+            </tr>
+            <tr>
+              <td class="mono">paysim_100k.csv</td>
+              <td>100,000</td>
+              <td class="mono">3,392</td>
+              <td class="mono">3,392</td>
+              <td class="mono">3,392</td>
+              <td class="mono">3,392</td>
+              <td><span class="badge-pass">✅ PASS</span></td>
+            </tr>
+            <tr>
+              <td class="mono">paysim_1m.csv</td>
+              <td>1,000,000</td>
+              <td class="mono">31,481</td>
+              <td class="mono">31,481</td>
+              <td class="mono">31,481</td>
+              <td class="mono">31,481</td>
+              <td><span class="badge-pass">✅ PASS</span></td>
+            </tr>
+            <tr>
+              <td class="mono">paysim_full.csv</td>
+              <td>6,362,620</td>
+              <td class="mono">81,410</td>
+              <td class="mono">81,410</td>
+              <td class="mono">81,410</td>
+              <td class="mono">81,410</td>
+              <td><span class="badge-pass">✅ PASS</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>OpenMPI Fraud Detection Engine · PaySim Dataset · October 2026</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
